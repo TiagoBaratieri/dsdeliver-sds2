@@ -2,6 +2,7 @@ package com.dvsuperior.dsdeliver.controllers;
 
 import com.dvsuperior.dsdeliver.dto.OrderDTO;
 import com.dvsuperior.dsdeliver.dto.ProductDTO;
+import com.dvsuperior.dsdeliver.entities.Order;
 import com.dvsuperior.dsdeliver.services.OrderService;
 import com.dvsuperior.dsdeliver.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,11 @@ public class OrderController {
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId())
                 .toUri();
         return ResponseEntity.created(uri).body(dto);
+    }
+    @PutMapping("/{id}/delivered")
+    public ResponseEntity<OrderDTO> setDelivered(@PathVariable Long id){
+        OrderDTO dto = service.setDelivered(id);
+        return ResponseEntity.ok().body(dto);
     }
 
 }
