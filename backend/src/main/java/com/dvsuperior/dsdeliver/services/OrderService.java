@@ -1,0 +1,24 @@
+package com.dvsuperior.dsdeliver.services;
+
+import com.dvsuperior.dsdeliver.dto.OrderDTO;
+import com.dvsuperior.dsdeliver.dto.ProductDTO;
+import com.dvsuperior.dsdeliver.entities.Order;
+import com.dvsuperior.dsdeliver.repositories.OrderRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Service
+public class OrderService {
+
+     @Autowired
+     private OrderRepository repository;
+     @Transactional(readOnly = true)
+     public List<OrderDTO> findAll(){
+         List<Order> list = repository.findOrdersWithProducts();
+         return list.stream().map(x -> new OrderDTO(x)).collect(Collectors.toList());
+     }
+}

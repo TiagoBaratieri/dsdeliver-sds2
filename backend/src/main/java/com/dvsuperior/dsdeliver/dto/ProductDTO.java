@@ -33,7 +33,8 @@ public class ProductDTO implements Serializable {
         imageUri = entity.getImageUri();
     }
 
-        public Long getId () {
+
+    public Long getId () {
         return id;
     }
 
